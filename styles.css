@@ -1,0 +1,87 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  color: #212529;
+}
+
+.main-header {
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  background-color: white;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  border: 1px solid #28a745;
+  transition: background-color 0.5s ease;
+  font: inherit;
+}
+
+.add-btn {
+  margin-left: 50px;
+  align-self: center;
+  height: 40px;
+}
+
+.btn:hover {
+  color: white;
+  background-color: #28a745;
+}
+
+.page-header {
+  text-align: center;
+}
+
+.main-table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  border-radius: 5px;
+}
+
+.table-cell {
+  min-width: 180px;
+  min-height: 20px;
+  border: 1px solid rgba(0,0,0,.125);
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.main-table-header {
+  padding: 3px;
+}
+
+.table-cell span {
+  padding: 5px;
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+  transition: background-color 0.5s ease;
+  background-color: white;
+}
+
+.table-cell input {
+  font: inherit;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  padding-right: 30px;
+}
+
+.table-cell span:hover {
+  background-color: darkgrey;
+}
+
+.table-cell__with-data {
+  cursor: pointer;
+}
+
+.table-cell form {
+  position: relative;
+}
+
+.confirm-btn {
+  position: absolute;
+  right: 0.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
