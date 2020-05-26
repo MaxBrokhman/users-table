@@ -1,5 +1,5 @@
 export const parseDate = (date) => {
-  if (date && !Number.isNaN(+date)) {
+  if (date && !Number.isNaN(Number(date))) {
     const year = date.getFullYear()
     const month = date.getMonth() + 1
     const monthFormatted = month < 10 

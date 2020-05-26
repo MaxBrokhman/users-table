@@ -4,6 +4,7 @@ import { normalizeString } from './utils/normalizeString.js'
 import { replaceSpacesWithUnderlines } from './utils/replaceSpacesWithUnderlines.js'
 import { appendChildren } from './dom-operations/appendChildren.js'
 import { parseDate } from './utils/parseDate.js'
+import { pagePaginator } from './pagePagination.js'
 
 const fragmentContainer = document.createDocumentFragment()
 
@@ -15,9 +16,43 @@ const convertHeaderToProp = compose(
 const tableHeaders = document.querySelectorAll('.main-table-header')
 const tableBody = document.querySelector('.main-table-body')
 const addUserBtn = document.querySelector('.add-btn')
+const outline = document.querySelector('.outline')
+const newUserForm = document.querySelector('.new-user-form')
+const popupCloseBtn = document.querySelector('.popup-close-btn')
+const newUserBtn = document.querySelector('.new-user-btn')
+
+outline.addEventListener('click', (evt) => {
+  if (evt.target === evt.currentTarget) {
+    outline.classList.add('visually-hidden')
+  }
+})
+popupCloseBtn.addEventListener('click', () => {
+  outline.classList.add('visually-hidden')
+})
 
 addUserBtn.addEventListener('click', () => {
-  
+  outline.classList.remove('visually-hidden')
+})
+
+newUserForm.addEventListener('submit', (evt) => {
+  evt.preventDefault()
+  const newUser = {}
+  newUserForm.querySelectorAll('input').forEach((input) => {
+    newUser[input.name] = input.type === 'date'
+      ? parseDate(new Date(input.value))
+      : input.value
+  })
+  newUser.id = users.length 
+    ? users[users.length - 1].id + 1
+    : 0 
+  users.push(newUser)
+  const btnOriginalCaption = newUserBtn.textContent
+  newUserBtn.textContent = 'Done!'
+  setTimeout(() => {
+    outline.classList.add('visually-hidden')
+    newUserBtn.textContent = btnOriginalCaption
+  }, 1000)
+  console.log(users)
 })
 
 const tableEditHandler = (evt) => {
@@ -40,7 +75,7 @@ const tableEditHandler = (evt) => {
     form.appendChild(input)
     form.appendChild(confirmBtn)
 
-    const replaceFormWithSpan = () => {
+    const updateCell = () => {
       const isDateInput = input.type === 'date'
       const enteredText = isDateInput
         ? new Date(input.value)
@@ -55,11 +90,11 @@ const tableEditHandler = (evt) => {
 
     const formSubmitHandler = (evt) => {
       evt.preventDefault()
-      replaceFormWithSpan()
+      updateCell()
       form.removeEventListener('submit', formSubmitHandler)
     }
     const inputBlurHandler = () => {
-      replaceFormWithSpan()
+      updateCell()
       input.removeEventListener('blur', inputBlurHandler)
     }
     form.addEventListener('submit', formSubmitHandler)
@@ -76,11 +111,11 @@ const appendToTableBody = appendChildren(tableBody)
 
 const createUserTr = (user) => {
   const tr = document.createElement('tr')
+  tr.dataset.userId = user.id
   tableHeaders.forEach((header) => {
     const prop = convertHeaderToProp(header.textContent)
     const td = document.createElement('td')
     const contentSpan = document.createElement('span')
-    contentSpan.setAttribute('tabindex', 0)
     contentSpan.textContent = user[prop]
     td.classList.add('table-cell', 'table-cell__with-data')
     td.appendChild(contentSpan)
