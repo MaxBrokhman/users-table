@@ -22,7 +22,7 @@ class DataManager {
   }
 
   getData() {
-    return this.sort()
+    return this.search()
   }
 
   add(item) {
@@ -94,9 +94,10 @@ class DataManager {
     return this.searchTerm 
       ? this.sort().filter(item => {
         const propValues = Object.values(item)
-        return propValues.some(value => value.indexOf(this.searchTerm > -1))
+        const filteredProps = propValues.filter(value => typeof value === 'string')
+        return filteredProps.some(value => value.indexOf(this.searchTerm) > -1)
       })
-      : this.data.sort() 
+      : this.sort() 
   }
 
   pick(start, end) {

@@ -21,6 +21,7 @@ class PageManager {
   updatePage() {
     this.container.innerHTML = ''
     const fragment = document.createDocumentFragment()
+    this.paginator.setMaxPages(this.dataManager.getData().length)
     const start = (this.paginator.currentPage - 1) * this.paginator.itemsNumberOnPage
     const end = this.paginator.currentPage * this.paginator.itemsNumberOnPage
     const dataToDisplay = this.dataManager.pick(start, end)

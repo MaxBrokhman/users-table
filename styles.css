@@ -245,6 +245,24 @@ body {
   color: white;
 }
 
+.search-btn {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.search-btn, .search-input {
+  align-self: center;
+  padding: 5px;
+}
+
+.search-btn {
+  height: 35px;
+}
+
+.search-input {
+  height: 21px;
+}
+
 .visually-hidden {
   width: 1px;
   height: 1px;

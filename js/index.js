@@ -4,6 +4,7 @@ import { usersManager } from './DataManager.js'
 import './popup.js'
 import './PageManager.js'
 import './sorting.js'
+import './search.js'
 
 const tableEditHandler = (evt) => {
   const currentCell = evt.target

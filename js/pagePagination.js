@@ -10,7 +10,12 @@ const pageNumber = document.querySelector('.pagination-number')
 class PagePaginator {
   constructor(dataLength){
     this._counter = 1
+    // number of users on page
     this._max = 9
+    this.maxPages = Math.ceil(dataLength / this._max)
+  }
+
+  setMaxPages(dataLength) {
     this.maxPages = Math.ceil(dataLength / this._max)
   }
 

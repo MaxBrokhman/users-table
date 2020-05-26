@@ -13,6 +13,10 @@
       <div class="header-container heading-container">
         <h1 class="page-heading">Users table</h1>
       </div>
+      <form class="header-container search-form">
+        <input type="text" id="search" placeholder="Type to search" class="search-input">
+        <button class="btn reqular-btn search-btn" type="submit">Search</button>
+      </form>
       <div class="header-container add-btn-container">
         <button class="btn add-btn success-btn">Add New User</button>
       </div>
@@ -78,27 +82,61 @@
         <form class="new-user-form">
           <div class="new-user-form-container">
             <label for="first_name">First Name</label>
-            <input name="first_name" class="new-user-form__input-fisrt-name" type="text" required>
+            <input 
+              name="first_name" 
+              class="new-user-form__input-fisrt-name" 
+              type="text" 
+              required
+              placeholder="Helena"
+            >
           </div>
           <div class="new-user-form-container">
             <label for="last_name">Last Name</label>
-            <input name="last_name" class="new-user-form__input-last-name" type="text" required>
+            <input 
+              name="last_name" 
+              class="new-user-form__input-last-name" 
+              type="text"
+              placeholder="Doe" 
+              required
+            >
           </div>
           <div class="new-user-form-container">
             <label for="gender">Gender</label>
-            <input name="gender" class="new-user-form__input-gender" type="text">
+            <input 
+              name="gender" 
+              class="new-user-form__input-gender" 
+              type="text"
+              placeholder="Female"
+            >
           </div>
           <div class="new-user-form-container">
             <label for="city">City</label>
-            <input name="city" class="new-user-form__input-city" type="text">
+            <input 
+              name="city" 
+              class="new-user-form__input-city" 
+              type="text"
+              placeholder="Boston"
+            >
           </div>
           <div class="new-user-form-container">
             <label for="company">Company</label>
-            <input name="company" class="new-user-form__input-company" type="text" required>
+            <input 
+              name="company" 
+              class="new-user-form__input-company" 
+              type="text"
+              placeholder="Microsoft" 
+              required
+            >
           </div>
           <div class="new-user-form-container">
             <label for="role">Role</label>
-            <input name="role" class="new-user-form__input-role" type="text" required>
+            <input 
+              name="role" 
+              class="new-user-form__input-role" 
+              type="text" 
+              placeholder="Manager"
+              required
+            >
           </div>
           <div class="new-user-form-container">
             <label for="date">Date</label>
