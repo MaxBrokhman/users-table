@@ -62,7 +62,9 @@ export class DataManager {
 
   sort() {
     if (!this.sortTerm) return this.data
-    if (this.sortTerm.includes('date')) this._sortValueProcessor = this._dateSortValueProcessor
+    this._sortValueProcessor = this.sortTerm.includes('date') 
+      ? this._dateSortValueProcessor
+      : this._stringSortValueProcessor
     return this.orderTerm === 'desc' 
       ? this.data.sort((a, b) => {
         const aValue = this._sortValueProcessor(a[this.sortTerm])
