@@ -29,46 +29,46 @@
           <tr>
             <th class="table-cell main-table-header">
               <span class="table-header-caption">First Name</span>
-              <button class="btn sort-btn sort-btn__up reqular-btn sort-btn__active"><</button>
-              <button class="btn sort-btn sort-btn__down reqular-btn"><</button>
+              <button class="btn sort-btn sort-btn__up reqular-btn sort-btn__active">&lt;</button>
+              <button class="btn sort-btn sort-btn__down reqular-btn">&lt;</button>
             </th>
             <th class="table-cell main-table-header">
               <span class="table-header-caption">Last Name</span>
-              <button class="btn sort-btn sort-btn__up reqular-btn"><</button>
-              <button class="btn sort-btn sort-btn__down reqular-btn"><</button>
+              <button class="btn sort-btn sort-btn__up reqular-btn">&lt;</button>
+              <button class="btn sort-btn sort-btn__down reqular-btn">&lt;</button>
             </th>
             <th class="table-cell main-table-header">
               <span class="table-header-caption">Gender</span>
-              <button class="btn sort-btn sort-btn__up reqular-btn"><</button>
-              <button class="btn sort-btn sort-btn__down reqular-btn"><</button>
+              <button class="btn sort-btn sort-btn__up reqular-btn">&lt;</button>
+              <button class="btn sort-btn sort-btn__down reqular-btn">&lt;</button>
             </th>
             <th class="table-cell main-table-header">
               <span class="table-header-caption">City</span>
-              <button class="btn sort-btn sort-btn__up reqular-btn"><</button>
-              <button class="btn sort-btn sort-btn__down reqular-btn"><</button>
+              <button class="btn sort-btn sort-btn__up reqular-btn">&lt;</button>
+              <button class="btn sort-btn sort-btn__down reqular-btn">&lt;</button>
             </th>
             <th class="table-cell main-table-header">
               <span class="table-header-caption">Company</span>
-              <button class="btn sort-btn sort-btn__up reqular-btn"><</button>
-              <button class="btn sort-btn sort-btn__down reqular-btn"><</button>
+              <button class="btn sort-btn sort-btn__up reqular-btn">&lt;</button>
+              <button class="btn sort-btn sort-btn__down reqular-btn">&lt;</button>
             </th>
             <th class="table-cell main-table-header">
               <span class="table-header-caption">Role</span>
-              <button class="btn sort-btn sort-btn__up reqular-btn"><</button>
-              <button class="btn sort-btn sort-btn__down reqular-btn"><</button>
+              <button class="btn sort-btn sort-btn__up reqular-btn">&lt;</button>
+              <button class="btn sort-btn sort-btn__down reqular-btn">&lt;</button>
             </th>
             <th class="table-cell main-table-header">
               <span class="table-header-caption">Date of birth</span>
-              <button class="btn sort-btn sort-btn__up reqular-btn"><</button>
-              <button class="btn sort-btn sort-btn__down reqular-btn"><</button>
+              <button class="btn sort-btn sort-btn__up reqular-btn">&lt;</button>
+              <button class="btn sort-btn sort-btn__down reqular-btn">&lt;</button>
             </th>
           </tr>
         </thead>
         <tbody class="main-table-body"></tbody>
       </table>
       <div class="pagination-btn-container">
-        <button class="btn pagination-btn pagination-btn__first reqular-btn"><<</button>
-        <button class="btn pagination-btn pagination-btn__previous reqular-btn"><</button>
+        <button class="btn pagination-btn pagination-btn__first reqular-btn">&lt;&lt;</button>
+        <button class="btn pagination-btn pagination-btn__previous reqular-btn">&lt;</button>
         <span class="pagination-number">1</span>
         <button class="btn pagination-btn pagination-btn__next reqular-btn">></button>
         <button class="btn pagination-btn pagination-btn__last reqular-btn">>></button>
@@ -83,7 +83,7 @@
           <div class="new-user-form-container">
             <label for="first_name">First Name</label>
             <input 
-              name="first_name" 
+              id="first_name" 
               class="new-user-form__input-fisrt-name" 
               type="text" 
               required
@@ -93,7 +93,7 @@
           <div class="new-user-form-container">
             <label for="last_name">Last Name</label>
             <input 
-              name="last_name" 
+              id="last_name" 
               class="new-user-form__input-last-name" 
               type="text"
               placeholder="Doe" 
@@ -103,7 +103,7 @@
           <div class="new-user-form-container">
             <label for="gender">Gender</label>
             <input 
-              name="gender" 
+              id="gender" 
               class="new-user-form__input-gender" 
               type="text"
               placeholder="Female"
@@ -112,7 +112,7 @@
           <div class="new-user-form-container">
             <label for="city">City</label>
             <input 
-              name="city" 
+              id="city" 
               class="new-user-form__input-city" 
               type="text"
               placeholder="Boston"
@@ -121,7 +121,7 @@
           <div class="new-user-form-container">
             <label for="company">Company</label>
             <input 
-              name="company" 
+              id="company" 
               class="new-user-form__input-company" 
               type="text"
               placeholder="Microsoft" 
@@ -131,7 +131,7 @@
           <div class="new-user-form-container">
             <label for="role">Role</label>
             <input 
-              name="role" 
+              id="role" 
               class="new-user-form__input-role" 
               type="text" 
               placeholder="Manager"
@@ -140,7 +140,7 @@
           </div>
           <div class="new-user-form-container">
             <label for="date">Date</label>
-            <input name="date" class="new-user-form__input-birth-date" type="date">
+            <input id="date" class="new-user-form__input-birth-date" type="date">
           </div>
           <div class="new-user-form-container">
             <button class="btn new-user-btn success-btn" type="submit">Add</button>

@@ -1,6 +1,6 @@
 import { parseDate } from '../utils/parseDate.js'
 import { usersManager } from '../usersManager/usersManager.js'
-import { updater } from '../UpdateObserver.js'
+import { updater } from '../updater/UpdateObserver.js'
 
 const addUserBtn = document.querySelector('.add-btn')
 const outline = document.querySelector('.outline')
@@ -25,7 +25,7 @@ newUserForm.addEventListener('submit', (evt) => {
   evt.preventDefault()
   const newUser = {}
   newUserForm.querySelectorAll('input').forEach((input) => {
-    newUser[input.name] = input.type === 'date'
+    newUser[input.id] = input.type === 'date'
       ? parseDate(new Date(input.value))
       : input.value
   })

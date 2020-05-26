@@ -1,5 +1,5 @@
 import { usersManager } from '../usersManager/usersManager.js'
-import { updater } from '../UpdateObserver.js'
+import { updater } from '../updater/UpdateObserver.js'
 import { convertHeaderToProp } from '../utils/string.js'
 
 const tableHeaders = document.querySelectorAll('.main-table-header')

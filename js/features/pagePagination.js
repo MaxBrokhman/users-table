@@ -1,5 +1,5 @@
 import { users } from '../users/users.js'
-import { updater } from '../UpdateObserver.js'
+import { updater } from '../updater/UpdateObserver.js'
 import { PagePaginator } from '../pagePaginator/PagePaginator.js'
 
 const firstBtn = document.querySelector('.pagination-btn__first')

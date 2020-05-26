@@ -1,5 +1,5 @@
 import { usersManager } from '../usersManager/usersManager.js'
-import { updater } from '../UpdateObserver.js'
+import { updater } from '../updater/UpdateObserver.js'
 import { pageNumber, pagePaginator } from './pagePagination.js'
 
 const searchForm = document.querySelector('.search-form')
