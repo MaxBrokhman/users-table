@@ -29,9 +29,7 @@ newUserForm.addEventListener('submit', (evt) => {
       ? parseDate(new Date(input.value))
       : input.value
   })
-  newUser.id = usersManager.getData().length 
-    ? usersManager.getData()[usersManager.getData().length - 1].id + 1
-    : 0 
+  newUser.id = new Date().getTime()
   usersManager.add(newUser)
   const btnOriginalCaption = newUserBtn.textContent
   updater.dispatch()
