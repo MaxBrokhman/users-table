@@ -207,6 +207,7 @@ body {
   border: 1px solid #343a40;
   text-align: center;
   margin: 0 5px;
+  padding: 5px;
 }
 
 .delete-row-btn {

@@ -93,7 +93,7 @@ export class DataManager {
       ? this.sort().filter(item => {
         const propValues = Object.values(item)
         const filteredProps = propValues.filter(value => typeof value === 'string')
-        return filteredProps.some(value => value.indexOf(this.searchTerm) > -1)
+        return filteredProps.some(value => value.toLowerCase().indexOf(this.searchTerm) > -1)
       })
       : this.sort() 
   }

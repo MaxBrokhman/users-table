@@ -42,10 +42,12 @@ const tableEditHandler = (evt) => {
       updateCell()
       form.removeEventListener('submit', formSubmitHandler)
     }
+
     const inputBlurHandler = () => {
       updateCell()
       input.removeEventListener('blur', inputBlurHandler)
     }
+    
     form.addEventListener('submit', formSubmitHandler)
     input.addEventListener('blur', inputBlurHandler)
     td.innerHTML = ''
