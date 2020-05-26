@@ -1,4 +1,6 @@
-export class DataManager {
+import { users } from './users/users.js'
+
+class DataManager {
   constructor(data) {
     this.data = data
   }
@@ -9,6 +11,17 @@ export class DataManager {
 
   add(item) {
     this.data.push(item)
+    return this
+  }
+
+  update(id, data) {
+    const itemIdx = this.data.findIndex(item => item.id === Number(id))
+    if (itemIdx > -1) {
+      this.data[itemIdx] = {
+        ...this.data[itemIdx],
+        ...data,
+      }
+    }
     return this
   }
 
@@ -35,3 +48,5 @@ export class DataManager {
     return this.data.slice(start, end)
   }
 }
+
+export const usersManager = new DataManager(users)

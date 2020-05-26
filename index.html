@@ -14,7 +14,7 @@
         <h1 class="page-heading">Users table</h1>
       </div>
       <div class="header-container add-btn-container">
-        <button class="btn add-btn">Add New User</button>
+        <button class="btn add-btn success-btn">Add New User</button>
       </div>
     </div>
   </header>
@@ -46,6 +46,7 @@
 
     <div class="outline visually-hidden">
       <section class="new-user-popup">
+        <h2 class="visually-hidden">Adding New User Popup</h2>
         <form class="new-user-form">
           <div class="new-user-form-container">
             <label for="first_name">First Name</label>
@@ -76,12 +77,13 @@
             <input name="date" class="new-user-form__input-birth-date" type="date">
           </div>
           <div class="new-user-form-container">
-            <button class="btn new-user-btn" type="submit">Add</button>
+            <button class="btn new-user-btn success-btn" type="submit">Add</button>
           </div>
         </form>
-        <button class="btn popup-close-btn">X</button>
+        <button class="btn popup-close-btn danger-btn">X</button>
       </section>
     </div>
+
   </main>
   <script type="module" src="./js/index.js"></script>
 </body>

@@ -42,33 +42,26 @@ class PagePaginator {
 
 export const pagePaginator = new PagePaginator(users.length)
 
-const updateUsers = () => {
-  updater.dispatch({
-    start: (pagePaginator.currentPage - 1) * pagePaginator.itemsNumberOnPage,
-    end: pagePaginator.currentPage * pagePaginator.itemsNumberOnPage,
-  })
-}
-
 firstBtn.addEventListener('click', () => {
   pagePaginator.currentPage = 1
   pageNumber.textContent = pagePaginator.currentPage
-  updateUsers()
+  updater.dispatch()
 })
 
 previousBtn.addEventListener('click', () => {
   pagePaginator.getPreviousPage()
   pageNumber.textContent = pagePaginator.currentPage
-  updateUsers()
+  updater.dispatch()
 })
 
 nextBtn.addEventListener('click', () => {
   pagePaginator.getNextPage()
   pageNumber.textContent = pagePaginator.currentPage
-  updateUsers()
+  updater.dispatch()
 })
 
 lastBtn.addEventListener('click', () => {
   pagePaginator.currentPage = pagePaginator.maxPages
   pageNumber.textContent = pagePaginator.currentPage
-  updateUsers()
+  updater.dispatch()
 })

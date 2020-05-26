@@ -28,9 +28,13 @@ body {
   background-color: white;
   border-radius: 0.25rem;
   cursor: pointer;
-  border: 1px solid #28a745;
+  border: 1px solid;
   transition: background-color 0.5s ease;
   font: inherit;
+}
+
+.btn:hover {
+  color: white;
 }
 
 .add-btn {
@@ -39,9 +43,21 @@ body {
   height: 40px;
 }
 
-.btn:hover {
-  color: white;
+.success-btn {
+  border-color: #28a745;
+}
+
+.success-btn:hover {
   background-color: #28a745;
+}
+
+.danger-btn {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+.danger-btn:hover {
+  background-color: #dc3545;
 }
 
 .main-table {
@@ -170,12 +186,6 @@ body {
   top: 10%;
   right: 10%;
   border-radius: 30px;
-  color: #dc3545;
-  border-color: #dc3545;
-}
-
-.popup-close-btn:hover {
-  background-color: #dc3545;
 }
 
 .pagination-btn {
@@ -195,6 +205,22 @@ body {
   border: 1px solid #343a40;
   text-align: center;
   margin: 0 5px;
+}
+
+.delete-row-btn {
+  display: none;
+  position: absolute;
+  border-radius: 30px;
+  color: #dc3545;
+  border-color: #dc3545;
+  width: 20px;
+  height: 20px;
+  transform: translateY(70%);
+  line-height: 1rem;
+}
+
+.user-row:hover .delete-row-btn {
+  display: block;
 }
 
 .visually-hidden {
