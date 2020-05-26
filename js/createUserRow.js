@@ -20,7 +20,7 @@ export const createUserRow = (user) => {
   const tr = document.createElement('tr')
   const deleteButton = document.createElement('button')
   deleteButton.classList.add('btn', 'delete-row-btn', 'danger-btn')
-  deleteButton.textContent = '-'
+  deleteButton.innerHTML = '&mdash;'
   deleteButton.addEventListener('click', () => {
     if (confirm('Are you sure you what to delete user? \n It cannot be undone!')) {
       usersManager.remove(user.id)

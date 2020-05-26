@@ -15,10 +15,9 @@
       </div>
       <form class="header-container search-form">
         <input type="text" id="search" placeholder="Type to search" class="search-input">
-        <button class="btn reqular-btn search-btn" type="submit">Search</button>
       </form>
       <div class="header-container add-btn-container">
-        <button class="btn add-btn success-btn">Add New User</button>
+        <button class="btn add-btn">Add New User</button>
       </div>
     </div>
   </header>
@@ -29,38 +28,38 @@
           <tr>
             <th class="table-cell main-table-header">
               <span class="table-header-caption">First Name</span>
-              <button class="btn sort-btn sort-btn__up reqular-btn sort-btn__active">&lt;</button>
-              <button class="btn sort-btn sort-btn__down reqular-btn">&lt;</button>
+              <button class="btn sort-btn sort-btn__up reqular-btn sort-btn__active"></button>
+              <button class="btn sort-btn sort-btn__down reqular-btn"></button>
             </th>
             <th class="table-cell main-table-header">
               <span class="table-header-caption">Last Name</span>
-              <button class="btn sort-btn sort-btn__up reqular-btn">&lt;</button>
-              <button class="btn sort-btn sort-btn__down reqular-btn">&lt;</button>
+              <button class="btn sort-btn sort-btn__up reqular-btn"></button>
+              <button class="btn sort-btn sort-btn__down reqular-btn"></button>
             </th>
             <th class="table-cell main-table-header">
               <span class="table-header-caption">Gender</span>
-              <button class="btn sort-btn sort-btn__up reqular-btn">&lt;</button>
-              <button class="btn sort-btn sort-btn__down reqular-btn">&lt;</button>
+              <button class="btn sort-btn sort-btn__up reqular-btn"></button>
+              <button class="btn sort-btn sort-btn__down reqular-btn"></button>
             </th>
             <th class="table-cell main-table-header">
               <span class="table-header-caption">City</span>
-              <button class="btn sort-btn sort-btn__up reqular-btn">&lt;</button>
-              <button class="btn sort-btn sort-btn__down reqular-btn">&lt;</button>
+              <button class="btn sort-btn sort-btn__up reqular-btn"></button>
+              <button class="btn sort-btn sort-btn__down reqular-btn"></button>
             </th>
             <th class="table-cell main-table-header">
               <span class="table-header-caption">Company</span>
-              <button class="btn sort-btn sort-btn__up reqular-btn">&lt;</button>
-              <button class="btn sort-btn sort-btn__down reqular-btn">&lt;</button>
+              <button class="btn sort-btn sort-btn__up reqular-btn"></button>
+              <button class="btn sort-btn sort-btn__down reqular-btn"></button>
             </th>
             <th class="table-cell main-table-header">
               <span class="table-header-caption">Role</span>
-              <button class="btn sort-btn sort-btn__up reqular-btn">&lt;</button>
-              <button class="btn sort-btn sort-btn__down reqular-btn">&lt;</button>
+              <button class="btn sort-btn sort-btn__up reqular-btn"></button>
+              <button class="btn sort-btn sort-btn__down reqular-btn"></button>
             </th>
             <th class="table-cell main-table-header">
               <span class="table-header-caption">Date of birth</span>
-              <button class="btn sort-btn sort-btn__up reqular-btn">&lt;</button>
-              <button class="btn sort-btn sort-btn__down reqular-btn">&lt;</button>
+              <button class="btn sort-btn sort-btn__up reqular-btn"></button>
+              <button class="btn sort-btn sort-btn__down reqular-btn"></button>
             </th>
           </tr>
         </thead>
@@ -81,72 +80,72 @@
         <h2 class="visually-hidden">Adding New User Popup</h2>
         <form class="new-user-form">
           <div class="new-user-form-container">
-            <label for="first_name">First Name</label>
+            <label class="new-user-form__label" for="first_name">First Name</label>
             <input 
               id="first_name" 
-              class="new-user-form__input-fisrt-name" 
+              class="new-user-form__input new-user-form__input-fisrt-name" 
               type="text" 
               required
               placeholder="Helena"
             >
           </div>
           <div class="new-user-form-container">
-            <label for="last_name">Last Name</label>
+            <label class="new-user-form__label" for="last_name">Last Name</label>
             <input 
               id="last_name" 
-              class="new-user-form__input-last-name" 
+              class="new-user-form__input new-user-form__input-last-name" 
               type="text"
               placeholder="Doe" 
               required
             >
           </div>
           <div class="new-user-form-container">
-            <label for="gender">Gender</label>
+            <label class="new-user-form__label" for="gender">Gender</label>
             <input 
               id="gender" 
-              class="new-user-form__input-gender" 
+              class="new-user-form__input new-user-form__input-gender" 
               type="text"
               placeholder="Female"
             >
           </div>
           <div class="new-user-form-container">
-            <label for="city">City</label>
+            <label class="new-user-form__label" for="city">City</label>
             <input 
               id="city" 
-              class="new-user-form__input-city" 
+              class="new-user-form__input new-user-form__input-city" 
               type="text"
               placeholder="Boston"
             >
           </div>
           <div class="new-user-form-container">
-            <label for="company">Company</label>
+            <label class="new-user-form__label" for="company">Company</label>
             <input 
               id="company" 
-              class="new-user-form__input-company" 
+              class="new-user-form__input new-user-form__input-company" 
               type="text"
               placeholder="Microsoft" 
               required
             >
           </div>
           <div class="new-user-form-container">
-            <label for="role">Role</label>
+            <label class="new-user-form__label" for="role">Role</label>
             <input 
               id="role" 
-              class="new-user-form__input-role" 
+              class="new-user-form__input new-user-form__input-role" 
               type="text" 
               placeholder="Manager"
               required
             >
           </div>
           <div class="new-user-form-container">
-            <label for="date">Date</label>
-            <input id="date" class="new-user-form__input-birth-date" type="date">
+            <label class="new-user-form__label" for="date">Date</label>
+            <input id="date" class="new-user-form__input new-user-form__input-birth-date" type="date">
           </div>
           <div class="new-user-form-container">
-            <button class="btn new-user-btn success-btn" type="submit">Add</button>
+            <button class="btn new-user-btn" type="submit">Add</button>
           </div>
         </form>
-        <button class="btn popup-close-btn danger-btn">X</button>
+        <button class="btn popup-close-btn">&#10006;</button>
       </section>
     </div>
 

@@ -10,7 +10,7 @@ const tableEditHandler = (evt) => {
     const form = document.createElement('form')
     const input = document.createElement('input')
     const confirmBtn = document.createElement('button')
-    confirmBtn.textContent = 'ok'
+    confirmBtn.innerHTML = '&#10004;'
     confirmBtn.className = 'btn confirm-btn success-btn'
     input.style.width = `${currentCell.parentElement.offsetWidth}px`
     input.style.height = `${currentCell.parentElement.offsetHeight}px`
