@@ -1,19 +1,12 @@
-import { compose } from './utils/compose.js'
 import { users } from './users/users.js'
-import { normalizeString } from './utils/normalizeString.js'
-import { replaceSpacesWithUnderlines } from './utils/replaceSpacesWithUnderlines.js'
-import { appendChildren } from './dom-operations/appendChildren.js'
 import { parseDate } from './utils/parseDate.js'
 import { pagePaginator } from './pagePagination.js'
+import { DataManager } from './DataManager.js'
+import { createUserRow } from './createUserRow.js'
+import { updater } from './UpdateObserver.js'
 
-const fragmentContainer = document.createDocumentFragment()
+const usersManager = new DataManager(users)
 
-const convertHeaderToProp = compose(
-  replaceSpacesWithUnderlines,
-  normalizeString,
-)
-
-const tableHeaders = document.querySelectorAll('.main-table-header')
 const tableBody = document.querySelector('.main-table-body')
 const addUserBtn = document.querySelector('.add-btn')
 const outline = document.querySelector('.outline')
@@ -42,17 +35,16 @@ newUserForm.addEventListener('submit', (evt) => {
       ? parseDate(new Date(input.value))
       : input.value
   })
-  newUser.id = users.length 
-    ? users[users.length - 1].id + 1
+  newUser.id = usersManager.getData().length 
+    ? usersManager.getData()[usersManager.getData().length - 1].id + 1
     : 0 
-  users.push(newUser)
+  usersManager.add(newUser)
   const btnOriginalCaption = newUserBtn.textContent
   newUserBtn.textContent = 'Done!'
   setTimeout(() => {
     outline.classList.add('visually-hidden')
     newUserBtn.textContent = btnOriginalCaption
   }, 1000)
-  console.log(users)
 })
 
 const tableEditHandler = (evt) => {
@@ -107,30 +99,22 @@ const tableEditHandler = (evt) => {
 
 tableBody.addEventListener('click', tableEditHandler)
 
-const appendToTableBody = appendChildren(tableBody)
-
-const createUserTr = (user) => {
-  const tr = document.createElement('tr')
-  tr.dataset.userId = user.id
-  tableHeaders.forEach((header) => {
-    const prop = convertHeaderToProp(header.textContent)
-    const td = document.createElement('td')
-    const contentSpan = document.createElement('span')
-    contentSpan.textContent = user[prop]
-    td.classList.add('table-cell', 'table-cell__with-data')
-    td.appendChild(contentSpan)
-    if (prop.includes('date')) {
-      td.dataset.type = 'date'
-    }
-    tr.appendChild(td)
+const updateUsers = (pages) => {
+  tableBody.innerHTML = ''
+  const fragment = document.createDocumentFragment()
+  const usersToDisplay = usersManager.pick(pages.start, pages.end)
+  usersToDisplay.forEach(user => {
+    fragment.appendChild(
+      createUserRow(user)
+    )
   })
-  return tr
+  tableBody.appendChild(fragment)
 }
 
-const appendTrToFragment = (user) => fragmentContainer.appendChild(
-  createUserTr(user)
-)
+updater.subscribe(updateUsers)
 
-users.slice(0, 9).forEach(appendTrToFragment)
+updateUsers({ 
+  start: pagePaginator.currentPage - 1, 
+  end: pagePaginator.itemsNumberOnPage, 
+})
 
-appendToTableBody(fragmentContainer)
