@@ -1,6 +1,6 @@
-import { parseDate } from './utils/parseDate.js'
-import { usersManager } from './DataManager.js'
-import { updater } from './UpdateObserver.js'
+import { parseDate } from '../utils/parseDate.js'
+import { usersManager } from '../usersManager/usersManager.js'
+import { updater } from '../UpdateObserver.js'
 
 const addUserBtn = document.querySelector('.add-btn')
 const outline = document.querySelector('.outline')

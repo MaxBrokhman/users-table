@@ -76,7 +76,7 @@ body {
   border: 1px solid rgba(0,0,0,.125);
   box-sizing: border-box;
   padding: 0;
-  width: calc(100%/7); 
+  width: calc(1200px/7); 
 }
 
 .main-table-header {
@@ -177,7 +177,7 @@ body {
 
 .pagination-btn-container {
   align-self: center;
-  margin-top: 5px;
+  margin-top: 15px;
   display: flex;
   width: 140px;
   justify-content: space-between;
@@ -210,19 +210,14 @@ body {
 }
 
 .delete-row-btn {
-  display: none;
   position: absolute;
   border-radius: 30px;
   color: #dc3545;
   border-color: #dc3545;
   width: 20px;
   height: 20px;
-  transform: translateY(70%);
+  transform: translate(30%, 70%);
   line-height: 1rem;
-}
-
-.user-row:hover .delete-row-btn {
-  display: block;
 }
 
 .sort-btn {

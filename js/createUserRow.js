@@ -1,13 +1,6 @@
-import { compose } from './utils/compose.js'
-import { normalizeString } from './utils/normalizeString.js'
-import { replaceSpacesWithUnderlines } from './utils/replaceSpacesWithUnderlines.js'
-import { usersManager } from './DataManager.js'
+import { convertHeaderToProp } from './utils/string.js'
+import { usersManager } from './usersManager/usersManager.js'
 import { updater } from './UpdateObserver.js'
-
-export const convertHeaderToProp = compose(
-  replaceSpacesWithUnderlines,
-  normalizeString,
-)
 
 const tableHeaders = document.querySelectorAll('.main-table-header')
 

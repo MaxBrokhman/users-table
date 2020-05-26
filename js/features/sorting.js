@@ -1,6 +1,6 @@
-import { usersManager } from './DataManager.js'
-import { updater } from './UpdateObserver.js'
-import { convertHeaderToProp } from './createUserRow.js'
+import { usersManager } from '../usersManager/usersManager.js'
+import { updater } from '../UpdateObserver.js'
+import { convertHeaderToProp } from '../utils/string.js'
 
 const tableHeaders = document.querySelectorAll('.main-table-header')
 const sortButtons = document.querySelectorAll('.sort-btn')

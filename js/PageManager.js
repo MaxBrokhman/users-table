@@ -1,7 +1,7 @@
 import { createUserRow } from './createUserRow.js'
-import { usersManager } from './DataManager.js'
+import { usersManager } from './usersManager/usersManager.js'
 import { updater } from './UpdateObserver.js'
-import { pagePaginator } from './pagePagination.js'
+import { pagePaginator } from './features/pagePagination.js'
 
 class PageManager {
   constructor({

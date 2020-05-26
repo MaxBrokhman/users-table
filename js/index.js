@@ -1,10 +1,10 @@
 import { parseDate } from './utils/parseDate.js'
 import { updater } from './UpdateObserver.js'
-import { usersManager } from './DataManager.js'
-import './popup.js'
+import { usersManager } from './usersManager/usersManager.js'
+import './features/popup.js'
 import './PageManager.js'
-import './sorting.js'
-import './search.js'
+import './features/sorting.js'
+import './features/search.js'
 
 const tableEditHandler = (evt) => {
   const currentCell = evt.target
@@ -15,7 +15,7 @@ const tableEditHandler = (evt) => {
     const input = document.createElement('input')
     const confirmBtn = document.createElement('button')
     confirmBtn.textContent = 'ok'
-    confirmBtn.className = 'btn confirm-btn'
+    confirmBtn.className = 'btn confirm-btn success-btn'
     input.style.width = `${currentCell.parentElement.offsetWidth}px`
     input.style.height = `${currentCell.parentElement.offsetHeight}px`
     const td = currentCell.parentElement

@@ -1,6 +1,4 @@
-import { users } from './users/users.js'
-
-class DataManager {
+export class DataManager {
   constructor(data) {
     this.data = data
     this.sortTerm = 'first_name'
@@ -104,5 +102,3 @@ class DataManager {
     return this.getData().slice(start, end)
   }
 }
-
-export const usersManager = new DataManager(users)
