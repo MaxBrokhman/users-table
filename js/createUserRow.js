@@ -4,7 +4,7 @@ import { replaceSpacesWithUnderlines } from './utils/replaceSpacesWithUnderlines
 import { usersManager } from './DataManager.js'
 import { updater } from './UpdateObserver.js'
 
-const convertHeaderToProp = compose(
+export const convertHeaderToProp = compose(
   replaceSpacesWithUnderlines,
   normalizeString,
 )
@@ -25,9 +25,10 @@ export const createUserRow = (user) => {
   tr.classList.add('user-row')
   tr.dataset.userId = user.id
   tableHeaders.forEach((header) => {
-    const prop = convertHeaderToProp(header.textContent)
+    const prop = convertHeaderToProp(header.querySelector('.table-header-caption').textContent)
     const td = document.createElement('td')
     const contentSpan = document.createElement('span')
+    contentSpan.classList.add('table-cell-data')
     contentSpan.textContent = user[prop]
     td.classList.add('table-cell', 'table-cell__with-data')
     td.appendChild(contentSpan)

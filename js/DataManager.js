@@ -3,10 +3,26 @@ import { users } from './users/users.js'
 class DataManager {
   constructor(data) {
     this.data = data
+    this.sortTerm = 'first_name'
+    this.orderTerm = 'asc'
+    this.searchTerm = ''
+    this._stringSortValueProcessor = this._stringSortValueProcessor.bind(this)
+    this._dateSortValueProcessor = this._dateSortValueProcessor.bind(this)
+    this._sortValueProcessor = this._stringSortValueProcessor
+  }
+
+  _stringSortValueProcessor(str) {
+    return str.toLowerCase()
+  }
+
+  _dateSortValueProcessor(date) {
+    return typeof date === 'string' && date.length
+      ? new Date(date.split('.').reverse()).getTime()
+      : 0
   }
 
   getData() {
-    return this.data
+    return this.sort()
   }
 
   add(item) {
@@ -25,6 +41,16 @@ class DataManager {
     return this
   }
 
+  setSorting(sort) {
+    this.sortTerm = sort
+    return this
+  }
+
+  setOrder(order) {
+    this.orderTerm = order
+    return this
+  }
+
   remove(itemId) {
     const itemIdx = this.data.findIndex(item => item.id === itemId)
     if (itemIdx > -1) {
@@ -37,15 +63,44 @@ class DataManager {
   }
 
   sort() {
-    
+    if (!this.sortTerm) return this.data
+    if (this.sortTerm.includes('date')) this._sortValueProcessor = this._dateSortValueProcessor
+    return this.orderTerm === 'desc' 
+      ? this.data.sort((a, b) => {
+        const aValue = this._sortValueProcessor(a[this.sortTerm])
+        const bValue = this._sortValueProcessor(b[this.sortTerm])
+        if (aValue < bValue) {
+          return 1;
+        }
+        if (aValue > bValue) {
+          return -1;
+        }
+        return 0;
+      })
+      : this.data.sort((a, b) => {
+        const aValue = this._sortValueProcessor(a[this.sortTerm])
+        const bValue = this._sortValueProcessor(b[this.sortTerm])
+        if (aValue > bValue) {
+          return 1;
+        }
+        if (aValue < bValue) {
+          return -1;
+        }
+        return 0;
+      })
   }
 
   search() {
-
+    return this.searchTerm 
+      ? this.sort().filter(item => {
+        const propValues = Object.values(item)
+        return propValues.some(value => value.indexOf(this.searchTerm > -1))
+      })
+      : this.data.sort() 
   }
 
   pick(start, end) {
-    return this.data.slice(start, end)
+    return this.getData().slice(start, end)
   }
 }
 

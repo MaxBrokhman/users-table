@@ -81,9 +81,11 @@ body {
 
 .main-table-header {
   padding: 3px;
+  padding-right: 55px;
+  position: relative;
 }
 
-.table-cell span {
+.table-cell-data  {
   padding: 5px;
   display: inline-block;
   width: 100%;
@@ -188,11 +190,11 @@ body {
   border-radius: 30px;
 }
 
-.pagination-btn {
+.reqular-btn {
   border-color: #343a40;
 }
 
-.pagination-btn:hover {
+.reqular-btn:hover {
   background-color: #343a40;
 }
 
@@ -221,6 +223,26 @@ body {
 
 .user-row:hover .delete-row-btn {
   display: block;
+}
+
+.sort-btn {
+  position: absolute;
+  
+}
+
+.sort-btn__up {
+  transform: rotate(90deg);
+  right: 30px;
+}
+
+.sort-btn__down {
+  transform: rotate(-90deg);
+  right: 3px;
+}
+
+.sort-btn__active {
+  background-color: #343a40;
+  color: white;
 }
 
 .visually-hidden {
