@@ -27,6 +27,7 @@ export const createUserRow = (user) => {
       updater.dispatch()
     }
   })
+  deleteButton.setAttribute('title', 'delete user')
   tr.classList.add('user-row')
   tr.dataset.userId = user.id
   tableHeaders.forEach((header) => tr.appendChild(createTd(header, user)))

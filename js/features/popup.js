@@ -34,6 +34,9 @@ newUserForm.addEventListener('submit', (evt) => {
   const btnOriginalCaption = newUserBtn.textContent
   updater.dispatch()
   newUserBtn.textContent = 'Done!'
+  newUserForm.querySelectorAll('input').forEach((input) => {
+    input.value = ''
+  })
   setTimeout(() => {
     outline.classList.add('visually-hidden')
     newUserBtn.textContent = btnOriginalCaption

@@ -249,6 +249,10 @@ body {
   padding: 0.26px;
 }
 
+.delete-row-btn:hover {
+  background-color: #dc3545;
+}
+
 .sort-btn {
   position: absolute;
   width: 20px;
