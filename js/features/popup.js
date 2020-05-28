@@ -3,22 +3,22 @@ import { usersManager } from '../usersManager/usersManager.js'
 import { updater } from '../updater/UpdateObserver.js'
 
 const addUserBtn = document.querySelector('.add-btn')
-const outline = document.querySelector('.outline')
+const overlay = document.querySelector('.overlay')
 const newUserForm = document.querySelector('.new-user-form')
 const popupCloseBtn = document.querySelector('.popup-close-btn')
 const newUserBtn = document.querySelector('.new-user-btn')
 
-outline.addEventListener('click', (evt) => {
+overlay.addEventListener('click', (evt) => {
   if (evt.target === evt.currentTarget) {
-    outline.classList.add('visually-hidden')
+    overlay.classList.add('visually-hidden')
   }
 })
 popupCloseBtn.addEventListener('click', () => {
-  outline.classList.add('visually-hidden')
+  overlay.classList.add('visually-hidden')
 })
 
 addUserBtn.addEventListener('click', () => {
-  outline.classList.remove('visually-hidden')
+  overlay.classList.remove('visually-hidden')
 })
 
 newUserForm.addEventListener('submit', (evt) => {
@@ -38,7 +38,7 @@ newUserForm.addEventListener('submit', (evt) => {
     input.value = ''
   })
   setTimeout(() => {
-    outline.classList.add('visually-hidden')
+    overlay.classList.add('visually-hidden')
     newUserBtn.textContent = btnOriginalCaption
   }, 1500)
 })

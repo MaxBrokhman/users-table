@@ -130,7 +130,7 @@ body {
   transform: translateY(-50%);
 }
 
-.outline {
+.overlay {
   position: fixed;
   width: 100%;
   height: 100%;
