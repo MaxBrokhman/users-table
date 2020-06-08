@@ -17,7 +17,6 @@ class TableButton extends HTMLElement {
 
   set btntype(value) {
     if (!value.length) return
-    console.log('setting', value)
     this.setAttribute('btntype', value)
   }
 

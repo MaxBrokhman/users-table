@@ -34,9 +34,13 @@ class TableCell extends HTMLElement {
     this.setAttribute('cellContent', value)
   }
 
+  get isDateInput() {
+    console.log('is date getter', this.dataset)
+    return this.dataset.type && this.dataset.type.includes('date')
+  }
+
   appendContent(value) {
     console.log('appending ', value);
-    
     this.contentSpan.textContent = value
   }
 
@@ -52,6 +56,9 @@ class TableCell extends HTMLElement {
             this.input.style.height = `${this.offsetHeight}px`
             this._initListeners()
             this.input.focus()
+            if (this.input.type === 'text')
+              this.input.setSelectionRange(this.cellContent.length, this.cellContent.length)
+            console.log('input type ', this.input.type, this.dataset)
           } else {
             this._destroyListeners()
             this.style.padding = ''
@@ -76,7 +83,6 @@ class TableCell extends HTMLElement {
     this.template.innerHTML = this.render()
     this.shadowRoot.appendChild(this.template.content.cloneNode(true))
     this.contentSpan = this.shadowRoot.querySelector('#content')
-    console.log('connected')
   }
 
   disconnectedCallback() {
@@ -86,11 +92,10 @@ class TableCell extends HTMLElement {
   }
 
   _parseNewValue(value) {
-    const isDateInput = this.input.type === 'date'
-    const newValue = isDateInput
+    const newValue = this.isDateInput
       ? new Date(value)
       : value
-    const newContent = isDateInput 
+    const newContent = this.isDateInput 
       ? parseDate(newValue)
       : newValue 
     this.cellContent = newContent
@@ -109,7 +114,7 @@ class TableCell extends HTMLElement {
   }
 
   render() {
-    console.log('render')
+    console.log('render', this.isDateInput)
     return `
     <style>
       #content {
@@ -130,7 +135,12 @@ class TableCell extends HTMLElement {
     ${this.iseditable 
       ? `
       <form id="form">
-        <input id="input" value="${this.cellContent}">
+        <input 
+          id="input" 
+          value="${this.isDateInput ? '' : this.cellContent}" 
+          type="${this.isDateInput ? 'date' : 'text'}" 
+          ${this.isDateInput ? `fomrat="dd.mm.yyyy"` : ''}
+        >
         <table-button id="btn" btntype="confirm">✔</table-button>
       </form>`
       : `<span id="content">${this.cellContent}</span>`}
