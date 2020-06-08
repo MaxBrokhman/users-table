@@ -15,32 +15,15 @@ class UsersTable extends HTMLElement {
           border-radius: 5px;
           width: 100%;
         }
-        tr {
+        tr, table-row {
           height: 45px;
+          display: table-row;
         }
-        tr:nth-of-type(odd) {
+        table-row:nth-of-type(odd) {
           background-color: antiquewhite;
         }
-        tr:nth-of-type(even) {
+        table-row:nth-of-type(even) {
           background-color: gainsboro;
-        }
-        table-cell {
-          display: table-cell;
-          text-align: left;
-          min-height: 20px;
-          border: 1px solid rgba(0,0,0,.125);
-          box-sizing: border-box;
-          padding: 0;
-          width: calc(1200px/7);
-          padding-left: 10px;
-          font-size: .9rem;
-          contain: content;
-          vertical-align: middle;
-          transition: background-color 0.5s ease;
-          cursor: pointer;
-        }
-        tr table-cell:hover {
-          background-color: darkgrey;
         }
       </style>
     `
@@ -50,7 +33,7 @@ class UsersTable extends HTMLElement {
 
   editHandler(evt) {
     const target = evt.composedPath().find(element => element.iseditable !== undefined)
-    if (target.iseditable) return
+    if (!target || target.iseditable) return
     if (target) {
       console.log('editing ', target)
       target.iseditable = true

@@ -2,7 +2,7 @@ import { parseDate } from "../../utils/parseDate.js"
 
 class TableCell extends HTMLElement {
   static get observedAttributes() {
-    return ['cellContent', 'iseditable']
+    return ['iseditable']
   }
   constructor() {
     super()
@@ -36,7 +36,7 @@ class TableCell extends HTMLElement {
 
   get isDateInput() {
     console.log('is date getter', this.dataset)
-    return this.dataset.type && this.dataset.type.includes('date')
+    return this.hasAttribute('type') && this.getAttribute('type').includes('date')
   }
 
   appendContent(value) {
@@ -117,6 +117,24 @@ class TableCell extends HTMLElement {
     console.log('render', this.isDateInput)
     return `
     <style>
+      :host {
+        display: table-cell;
+        text-align: left;
+        min-height: 20px;
+        border: 1px solid rgba(0,0,0,.125);
+        box-sizing: border-box;
+        padding: 0;
+        width: calc(1200px/7);
+        padding-left: 10px;
+        font-size: .9rem;
+        contain: content;
+        vertical-align: middle;
+        transition: background-color 0.5s ease;
+        cursor: pointer;
+      }
+      :host(:hover) {
+        background-color: darkgrey;
+      }
       #content {
         padding: 5px;
         display: inline-block;
@@ -138,8 +156,7 @@ class TableCell extends HTMLElement {
         <input 
           id="input" 
           value="${this.isDateInput ? '' : this.cellContent}" 
-          type="${this.isDateInput ? 'date' : 'text'}" 
-          ${this.isDateInput ? `fomrat="dd.mm.yyyy"` : ''}
+          type="${this.isDateInput ? 'date' : 'text'}"
         >
         <table-button id="btn" btntype="confirm">✔</table-button>
       </form>`
