@@ -3,9 +3,8 @@ class UsersTable extends HTMLElement {
     super()
     this.attachShadow({mode: 'open'})
     this.template = document.createElement('template')
-    this.headerRow = null
+    this._data = []
     this.body = null
-    this._headers = []
     this.styles = `
       <style>
         #table {
@@ -31,6 +30,15 @@ class UsersTable extends HTMLElement {
     this.editHandler = this.editHandler.bind(this)
   }
 
+  get data() {
+    return this._data
+  }
+
+  set data(value) {
+    this._data = value
+    this._renderWithNewData()
+  }
+
   editHandler(evt) {
     const target = evt.composedPath().find(element => element.iseditable !== undefined)
     if (!target || target.iseditable) return
@@ -40,45 +48,37 @@ class UsersTable extends HTMLElement {
     }
   }
 
-  appendTableRow(row) {
-    this.body.appendChild(row)
-  }
-
-  get headers() {
-    return this._headers
-  }
-
-  set headers(value) {
-    this._headers = value.length 
-      ? value
-      : []
-    this.headerRow.innerHTML = this._createHeadersRow()
-  }
-
-  _createHeadersRow() {
-    return this.headers.map(header => `<table-header>${header}</table-header>`).join('')
-  }
-
   render() {
     return `
       ${this.styles}
       <table id="table">
         <thead>
-          <tr id="header-row">
-          </tr>
+          <table-row header-row></table-row>
         </thead>
         <tbody id="body">
+          <slot></slot>
         </tbody>
       </table>
     `
   }
 
+  _renderWithNewData() {
+    this.body.innerHTML = ''
+    const fragment = document.createDocumentFragment()
+    this.data.forEach((item) => {
+      const tr = document.createElement('table-row')
+      tr.data = item
+      fragment.appendChild(tr)
+    })
+    this.body.appendChild(fragment)
+  }
+
   connectedCallback() {
     this.template.innerHTML = this.render()
     this.shadowRoot.appendChild(this.template.content.cloneNode(true))
-    this.headerRow = this.shadowRoot.querySelector('#header-row')
     this.body = this.shadowRoot.querySelector('#body')
     this.addEventListener('click', this.editHandler)
+    this._renderWithNewData()
   }
 
   disconnectedCallback() {
