@@ -2,11 +2,11 @@ import { parseDate } from '../utils/parseDate.js'
 import { usersManager } from '../usersManager/usersManager.js'
 import { updater } from '../updater/UpdateObserver.js'
 
-const addUserBtn = document.querySelector('.add-btn')
+const addUserBtn = document.querySelector('table-button[btntype="add"]')
 const overlay = document.querySelector('.overlay')
 const newUserForm = document.querySelector('.new-user-form')
-const popupCloseBtn = document.querySelector('.popup-close-btn')
-const newUserBtn = document.querySelector('.new-user-btn')
+const popupCloseBtn = overlay.querySelector('table-button[btntype="close"]')
+const newUserBtn = newUserForm.querySelector('new-user-btn[btntype="newUser"]')
 
 overlay.addEventListener('click', (evt) => {
   if (evt.target === evt.currentTarget) {

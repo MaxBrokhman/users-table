@@ -17,13 +17,15 @@
         <input type="text" id="search" placeholder="Type to search" class="search-input">
       </form>
       <div class="header-container add-btn-container">
-        <button class="btn add-btn">Add New User</button>
+        <table-button btntype="add">Add New User</table-button>
       </div>
     </div>
   </header>
   <main>
     <div class="container table-container">
-      <table class="main-table">
+      <users-table>
+      </users-table>
+      <!-- <table class="main-table">
         <thead class="main-table-head">
           <tr>
             <th class="table-cell main-table-header">
@@ -64,7 +66,7 @@
           </tr>
         </thead>
         <tbody class="main-table-body"></tbody>
-      </table>
+      </table> -->
       <div class="pagination-btn-container">
         <button class="btn pagination-btn pagination-btn__first reqular-btn" title="first page">&lt;&lt;</button>
         <button class="btn pagination-btn pagination-btn__previous reqular-btn" title="previous page">&lt;</button>
@@ -142,13 +144,12 @@
             <input id="date" class="new-user-form__input new-user-form__input-birth-date" type="date">
           </div>
           <div class="new-user-form-container">
-            <button class="btn new-user-btn" type="submit">Add</button>
+            <table-button btntype="newUser">Add</table-button>
           </div>
         </form>
-        <button class="btn popup-close-btn">&#10006;</button>
+        <table-button btntype="close">&#10006;</table-button>
       </section>
     </div>
-
   </main>
   <script type="module" src="./js/index.js"></script>
 </body>
