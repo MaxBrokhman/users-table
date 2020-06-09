@@ -1,18 +1,26 @@
 class UpdateObserver {
   constructor() {
-    this.subscriptions = []
+    this.subscriptions = {}
   }
 
-  subscribe(fn) {
-    this.subscriptions.push(fn)
+  subscribe(event, callback) {
+    if (this.subscriptions[event]) {
+      this.subscriptions[event].push(callback)
+    } else {
+      this.subscriptions[event] = [callback]
+    }
   }
 
-  unsubscribe(fn) {
-    this.subscriptions = this.subscriptions.filter(sub => sub !== fn)
+  unsubscribe(event, callback) {
+    if (this.subscriptions[event]) {
+      this.subscriptions = this.subscriptions.filter(sub => sub !== callback)
+    }
   }
 
-  dispatch(data) {
-    this.subscriptions.forEach(sub => sub(data));
+  dispatch(event, data) {
+    if (this.subscriptions[event]) {
+      this.subscriptions[event].forEach(sub => sub(data))
+    }
   }
 }
 

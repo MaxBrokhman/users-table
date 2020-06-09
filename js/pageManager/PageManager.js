@@ -12,6 +12,7 @@ class PageManager {
     this.dataManager = dataManager
     this.container = container
     this.updatePage = this.updatePage.bind(this)
+    this.updatePageWithNext = this.updatePageWithNext.bind(this)
     this.updatePage()
   }
 
@@ -19,8 +20,13 @@ class PageManager {
     this.paginator.setMaxPages(this.dataManager.getData().length)
     const start = (this.paginator.currentPage - 1) * this.paginator.itemsNumberOnPage
     const end = this.paginator.currentPage * this.paginator.itemsNumberOnPage
-    const dataToDisplay = this.dataManager.pick(start, end)
-    this.container.data = dataToDisplay
+    this.container.setData(this.dataManager.pick(start, end))
+  }
+
+  updatePageWithNext() {
+    const end = this.paginator.currentPage * this.paginator.itemsNumberOnPage
+    const dataToAdd = this.dataManager.pick(end - 1, end)
+    dataToAdd.length && this.container.updateData(dataToAdd[0])
   }
 }
 
@@ -30,4 +36,6 @@ export const pageManager = new PageManager({
   container: document.querySelector('users-table'),
 })
 
-updater.subscribe(pageManager.updatePage)
+updater.subscribe('delete-user', usersManager.remove)
+updater.subscribe('delete-user', pageManager.updatePageWithNext)
+// updater.subscribe(pageManager.updatePage)

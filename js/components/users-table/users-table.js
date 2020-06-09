@@ -28,15 +28,23 @@ class UsersTable extends HTMLElement {
     `
 
     this.editHandler = this.editHandler.bind(this)
+    this.deleteRowHandler = this.deleteRowHandler.bind(this)
   }
 
   get data() {
     return this._data
   }
 
-  set data(value) {
-    this._data = value
+  setData(data) {
+    this._data = data
     this._renderWithNewData()
+  }
+
+  updateData(data) {
+    this._data.push(data)
+    const tr = document.createElement('table-row')
+    tr.data = data
+    this.body.appendChild(tr)
   }
 
   editHandler(evt) {
@@ -71,6 +79,10 @@ class UsersTable extends HTMLElement {
       fragment.appendChild(tr)
     })
     this.body.appendChild(fragment)
+  }
+
+  deleteRowHandler() {
+    this.body.insertAdjacentHTML('beforeend', `<>`)
   }
 
   connectedCallback() {

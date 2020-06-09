@@ -58,7 +58,7 @@ class TableCell extends HTMLElement {
             this.input.focus()
             if (this.input.type === 'text')
               this.input.setSelectionRange(this.cellContent.length, this.cellContent.length)
-            console.log('input type ', this.input.type, this.dataset)
+              console.log('input type ', this.input.type, this.dataset)
           } else {
             this._destroyListeners()
             this.style.padding = ''
@@ -100,6 +100,13 @@ class TableCell extends HTMLElement {
       : newValue 
     this.cellContent = newContent
     this.iseditable = false
+    this.dispatchEvent(
+      new CustomEvent('update-user', {
+        composed: true, 
+        bubbles: true, 
+        detail: { [this.getAttribute('type')]: newContent },
+      })
+    )
   }
 
   submitHandler (evt) {
