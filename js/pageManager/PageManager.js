@@ -13,6 +13,8 @@ class PageManager {
     this.container = container
     this.updatePage = this.updatePage.bind(this)
     this.updatePageWithNext = this.updatePageWithNext.bind(this)
+    this.updateOnSort = this.updateOnSort.bind(this)
+    this.updateOnDelete = this.updateOnDelete.bind(this)
     this.updatePage()
   }
 
@@ -28,6 +30,22 @@ class PageManager {
     const dataToAdd = this.dataManager.pick(end - 1, end)
     dataToAdd.length && this.container.updateData(dataToAdd[0])
   }
+
+  updateOnSort({ sort, order }) {
+    if (
+      this.dataManager.sortTerm !== sort || 
+      this.dataManager.orderTerm !== order
+    ) {
+      this.dataManager
+        .setSorting(sort)
+        .setOrder(order)
+      this.updatePage()
+    } 
+  }
+
+  updateOnDelete(id) {
+    this.dataManager.remove(id)
+  }
 }
 
 export const pageManager = new PageManager({
@@ -36,6 +54,7 @@ export const pageManager = new PageManager({
   container: document.querySelector('users-table'),
 })
 
-updater.subscribe('delete-user', usersManager.remove)
+updater.subscribe('delete-user', pageManager.updateOnDelete)
 updater.subscribe('delete-user', pageManager.updatePageWithNext)
 updater.subscribe('change-page', pageManager.updatePage)
+updater.subscribe('sort', pageManager.updateOnSort)

@@ -6,7 +6,6 @@ export class DataManager {
     this.searchTerm = ''
     this._stringSortValueProcessor = this._stringSortValueProcessor.bind(this)
     this._dateSortValueProcessor = this._dateSortValueProcessor.bind(this)
-    this.remove = this.remove.bind(this)
     this._sortValueProcessor = this._stringSortValueProcessor
   }
 
