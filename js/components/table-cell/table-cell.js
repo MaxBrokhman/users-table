@@ -35,12 +35,10 @@ class TableCell extends HTMLElement {
   }
 
   get isDateInput() {
-    console.log('is date getter', this.dataset)
     return this.hasAttribute('type') && this.getAttribute('type').includes('date')
   }
 
   appendContent(value) {
-    console.log('appending ', value);
     this.contentSpan.textContent = value
   }
 
@@ -58,7 +56,6 @@ class TableCell extends HTMLElement {
             this.input.focus()
             if (this.input.type === 'text')
               this.input.setSelectionRange(this.cellContent.length, this.cellContent.length)
-              console.log('input type ', this.input.type, this.dataset)
           } else {
             this._destroyListeners()
             this.style.padding = ''
@@ -111,64 +108,61 @@ class TableCell extends HTMLElement {
 
   submitHandler (evt) {
     evt.preventDefault()
-    console.log('submited')
     this._parseNewValue(this.input.value)
   }
 
   blurHandler() {
-    console.log('blured')
     this._parseNewValue(this.input.value)
   }
 
   render() {
-    console.log('render', this.isDateInput)
     return `
-    <style>
-      :host {
-        display: table-cell;
-        text-align: left;
-        min-height: 20px;
-        border: 1px solid rgba(0,0,0,.125);
-        box-sizing: border-box;
-        padding: 0;
-        width: calc(1200px/7);
-        padding-left: 10px;
-        font-size: .9rem;
-        contain: content;
-        vertical-align: middle;
-        transition: background-color 0.5s ease;
-        cursor: pointer;
-      }
-      :host(:hover) {
-        background-color: darkgrey;
-      }
-      #content {
-        padding: 5px;
-        display: inline-block;
-        width: 100%;
-        box-sizing: border-box;
-        word-break: normal;
-      }
-      #input, #form {
-        width: 100%;
-        box-sizing: border-box;
-      }
-      #input {
-        padding-left: 10px;
-      }
-    </style>
-    ${this.iseditable 
-      ? `
-      <form id="form">
-        <input 
-          id="input" 
-          value="${this.isDateInput ? '' : this.cellContent}" 
-          type="${this.isDateInput ? 'date' : 'text'}"
-        >
-        <table-button id="btn" btntype="confirm">✔</table-button>
-      </form>`
-      : `<span id="content">${this.cellContent}</span>`}
-    `
+      <style>
+        :host {
+          display: table-cell;
+          text-align: left;
+          min-height: 20px;
+          border: 1px solid rgba(0,0,0,.125);
+          box-sizing: border-box;
+          padding: 0;
+          width: calc(1200px/7);
+          padding-left: 10px;
+          font-size: .9rem;
+          contain: content;
+          vertical-align: middle;
+          transition: background-color 0.5s ease;
+          cursor: pointer;
+        }
+        :host(:hover) {
+          background-color: darkgrey;
+        }
+        #content {
+          padding: 5px;
+          display: inline-block;
+          width: 100%;
+          box-sizing: border-box;
+          word-break: normal;
+        }
+        #input, #form {
+          width: 100%;
+          box-sizing: border-box;
+        }
+        #input {
+          padding-left: 10px;
+        }
+      </style>
+      ${this.iseditable 
+        ? `
+        <form id="form">
+          <input 
+            id="input" 
+            value="${this.isDateInput ? '' : this.cellContent}" 
+            type="${this.isDateInput ? 'date' : 'text'}"
+          >
+          <table-button id="btn" btntype="confirm">✔</table-button>
+        </form>`
+        : `<span id="content">${this.cellContent}</span>`}
+      `
   }
 }
 

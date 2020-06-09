@@ -1,6 +1,6 @@
 import { usersManager } from '../usersManager/usersManager.js'
 import { updater } from '../updater/UpdateObserver.js'
-import { pagePaginator } from '../features/pagePagination.js'
+import { PagePaginator } from '../pagePaginator/PagePaginator.js'
 
 class PageManager {
   constructor({
@@ -16,7 +16,12 @@ class PageManager {
     this.updateOnSort = this.updateOnSort.bind(this)
     this.updateOnDelete = this.updateOnDelete.bind(this)
     this.updateOnSearch = this.updateOnSearch.bind(this)
+    this.updateOnPageChange = this.updateOnPageChange.bind(this)
     this.updatePage()
+    customElements.whenDefined('pagination-panel').then(() => {
+      this.paginationPanel = document.querySelector('pagination-panel')
+      this.paginationPanel.currentPage = this.paginator.currentPage
+    })
   }
 
   updatePage() {
@@ -53,10 +58,32 @@ class PageManager {
     this.dataManager.searchTerm = search
     this.updatePage()
   }
+
+  updateOnPageChange(evt) {
+    const currentPage = this.paginator.currentPage
+    switch(evt) {
+      case 'first':
+        this.paginator.currentPage = 1
+        break
+      case 'last':
+        this.paginator.currentPage = this.paginator.maxPages
+        break
+      case 'previous':
+        this.paginator.getPreviousPage()
+        break
+      case 'next':
+        this.paginator.getNextPage()
+        break
+    }
+    if (currentPage !== this.paginator.currentPage) {
+      this.paginationPanel.currentPage = this.paginator.currentPage
+      this.updatePage()
+    }
+  }
 }
 
 export const pageManager = new PageManager({
-  paginator: pagePaginator,
+  paginator: new PagePaginator(usersManager.data.length),
   dataManager: usersManager,
   container: document.querySelector('users-table'),
 })
@@ -66,3 +93,4 @@ updater.subscribe('delete-user', pageManager.updatePageWithNext)
 updater.subscribe('change-page', pageManager.updatePage)
 updater.subscribe('sort', pageManager.updateOnSort)
 updater.subscribe('search', pageManager.updateOnSearch)
+updater.subscribe('page-change', pageManager.updateOnPageChange)
