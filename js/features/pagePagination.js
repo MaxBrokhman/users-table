@@ -12,25 +12,31 @@ export const pagePaginator = new PagePaginator(users.length)
 
 const updatePage = () => {
   pageNumber.textContent = pagePaginator.currentPage
-  updater.dispatch()
+  updater.dispatch('change-page')
 }
 
 firstBtn.addEventListener('click', () => {
-  pagePaginator.currentPage = 1
-  updatePage()
+  if (pagePaginator.currentPage !== 1) {
+    pagePaginator.currentPage = 1
+    updater.dispatch('change-page')
+  }
 })
 
 previousBtn.addEventListener('click', () => {
-  pagePaginator.getPreviousPage()
-  updatePage()
+  const currentPage = pagePaginator.currentPage
+  const previousPage = pagePaginator.getPreviousPage()
+  if (currentPage !== previousPage) updatePage()
 })
 
 nextBtn.addEventListener('click', () => {
-  pagePaginator.getNextPage()
-  updatePage()
+  const currentPage = pagePaginator.currentPage
+  const nextPage = pagePaginator.getNextPage()
+  if (currentPage !== nextPage) updatePage()
 })
 
 lastBtn.addEventListener('click', () => {
-  pagePaginator.currentPage = pagePaginator.maxPages
-  updatePage()
+  if (pagePaginator.currentPage !== pagePaginator.maxPages) {
+    pagePaginator.currentPage = pagePaginator.maxPages
+    updatePage()
+  }
 })

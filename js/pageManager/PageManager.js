@@ -38,4 +38,4 @@ export const pageManager = new PageManager({
 
 updater.subscribe('delete-user', usersManager.remove)
 updater.subscribe('delete-user', pageManager.updatePageWithNext)
-// updater.subscribe(pageManager.updatePage)
+updater.subscribe('change-page', pageManager.updatePage)
