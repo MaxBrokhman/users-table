@@ -19,11 +19,6 @@ body {
   justify-content: space-between;
 }
 
-.header-container {
-  display: flex;
-  justify-content: space-between;
-}
-
 .btn {
   background-color: white;
   border-radius: 0.25rem;

@@ -15,6 +15,7 @@ class PageManager {
     this.updatePageWithNext = this.updatePageWithNext.bind(this)
     this.updateOnSort = this.updateOnSort.bind(this)
     this.updateOnDelete = this.updateOnDelete.bind(this)
+    this.updateOnSearch = this.updateOnSearch.bind(this)
     this.updatePage()
   }
 
@@ -46,6 +47,12 @@ class PageManager {
   updateOnDelete(id) {
     this.dataManager.remove(id)
   }
+
+  updateOnSearch(search) {
+    this.paginator.currentPage = 1
+    this.dataManager.searchTerm = search
+    this.updatePage()
+  }
 }
 
 export const pageManager = new PageManager({
@@ -58,3 +65,4 @@ updater.subscribe('delete-user', pageManager.updateOnDelete)
 updater.subscribe('delete-user', pageManager.updatePageWithNext)
 updater.subscribe('change-page', pageManager.updatePage)
 updater.subscribe('sort', pageManager.updateOnSort)
+updater.subscribe('search', pageManager.updateOnSearch)
