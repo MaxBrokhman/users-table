@@ -1,6 +1,7 @@
 import { headers } from '../../config.js'
 import { convertHeaderToProp } from '../../utils/string.js'
 import { updater } from '../../updater/UpdateObserver.js'
+import { usersManager } from '../../usersManager/usersManager.js'
 
 class TableHeaderRow extends HTMLElement {
   static get headerKeys() {
@@ -48,7 +49,7 @@ class TableHeaderRow extends HTMLElement {
           title="sort in ascending order" 
           btntype="asc"
           slot="buttons"
-          class="${idx === 0 ? 'active' : ''}"
+          class="${convertHeaderToProp(key) === usersManager.sortTerm ? 'active' : ''}"
         ></table-button>
         <table-button 
           title="sort in descending order" 
