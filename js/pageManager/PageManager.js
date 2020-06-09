@@ -17,6 +17,7 @@ class PageManager {
     this.updateOnDelete = this.updateOnDelete.bind(this)
     this.updateOnSearch = this.updateOnSearch.bind(this)
     this.updateOnPageChange = this.updateOnPageChange.bind(this)
+    this.updateWithNewData = this.updateWithNewData.bind(this)
     this.updatePage()
     customElements.whenDefined('pagination-panel').then(() => {
       this.paginationPanel = document.querySelector('pagination-panel')
@@ -80,6 +81,12 @@ class PageManager {
       this.updatePage()
     }
   }
+
+  updateWithNewData(user) {
+    console.log(user);
+    
+    this.dataManager.add(user)
+  }
 }
 
 export const pageManager = new PageManager({
@@ -94,3 +101,4 @@ updater.subscribe('change-page', pageManager.updatePage)
 updater.subscribe('sort', pageManager.updateOnSort)
 updater.subscribe('search', pageManager.updateOnSearch)
 updater.subscribe('page-change', pageManager.updateOnPageChange)
+updater.subscribe('new-user', pageManager.updateWithNewData)

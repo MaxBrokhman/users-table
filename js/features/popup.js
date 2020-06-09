@@ -1,9 +1,7 @@
-import { parseDate } from '../utils/parseDate.js'
-import { usersManager } from '../usersManager/usersManager.js'
-import { updater } from '../updater/UpdateObserver.js'
-
 const addUserBtn = document.querySelector('table-button[btntype="add"]')
-addUserBtn.addEventListener('click', () => {
+addUserBtn.addEventListener('click', (evt) => {
+  evt.composedPath().some(element => 
+    element.tagName && element.tagName.toLowerCase() === 'button') &&
   document.body.appendChild(document.createElement('new-user-popup'))
 })
 // const overlay = document.querySelector('.overlay')

@@ -9,6 +9,7 @@ class TableButton extends HTMLElement {
     super()
     this.attachShadow({mode: 'open'})
     this.template = document.createElement('template')
+    this.btn = null
   }
 
   get btntype () {
@@ -23,6 +24,7 @@ class TableButton extends HTMLElement {
   connectedCallback() {
     this.template.innerHTML = this.render()
     this.shadowRoot.appendChild(this.template.content.cloneNode(true))
+    this.btn = this.shadowRoot.querySelector('#btn')
   }
 
   render() {

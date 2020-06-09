@@ -28,6 +28,10 @@ export const stylesByType = {
     }
   `,
   newUser: `
+    :host {
+      display: flex;
+      justify-content: center;
+    }
     #btn {
       padding: 10px 25px;
       color: #fff;

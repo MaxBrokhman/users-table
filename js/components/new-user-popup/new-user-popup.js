@@ -1,13 +1,14 @@
+import { parseDate } from "../../utils/parseDate.js"
+import { updater } from "../../updater/UpdateObserver.js"
+
 class NewUserPopup extends HTMLElement {
-  static get observedAttributes() {
-    return []
-  }
   constructor() {
     super()
     this.attachShadow({mode: 'open'})
     this.template = document.createElement('template')
     this.closeBtn = null
     this.addBtn = null
+    this.form = null
 
     this.closeBtnHandler = this.closeBtnHandler.bind(this)
     this.addBtnHandler = this.addBtnHandler.bind(this)
@@ -18,15 +19,20 @@ class NewUserPopup extends HTMLElement {
   }
 
   addBtnHandler() {
-
-  }
-
-  attributeChangedCallback(name, oldValue, newValue) {
-    if (oldValue !== newValue) {
-      switch(name) {
-        case '':
-      }
+    const newUser = {}
+    for (const popupInput of this.shadowRoot.querySelectorAll('popup-input')) {
+      if (!popupInput.input.reportValidity()) return
+      console.log(popupInput.input.type, new Date(popupInput.inputValue))
+      newUser[popupInput.input.id] = popupInput.input.type === 'date'
+        ? parseDate(new Date(popupInput.inputValue))
+        : popupInput.inputValue
     }
+    newUser.id = new Date().getTime()
+    updater.dispatch('new-user', newUser)
+    this.addBtn.btn.textContent = 'Done!'
+    setTimeout(() => {
+      this.remove()
+    }, 1500)
   }
 
   connectedCallback() {
@@ -35,10 +41,12 @@ class NewUserPopup extends HTMLElement {
     this.closeBtn = this.shadowRoot.querySelector('#close')
     this.addBtn = this.shadowRoot.querySelector('#add')
     this.closeBtn.addEventListener('click', this.closeBtnHandler)
+    this.addBtn.addEventListener('click', this.addBtnHandler)
   }
 
   disconnectedCallback() {
     this.closeBtn.removeEventListener('click', this.closeBtnHandler)
+    this.addBtn.removeEventListener('click', this.addBtnHandler)
   }
 
   render() {
@@ -127,7 +135,7 @@ class NewUserPopup extends HTMLElement {
             Role
           </popup-input>
           <popup-input
-            input-name="date"
+            input-name="date_of_birth"
           >
             Date
           </popup-input>

@@ -3,6 +3,7 @@ class PopupInput extends HTMLElement {
     super()
     this.attachShadow({mode: 'open'})
     this.template = document.createElement('template')
+    this.input = null
   }
 
   get inputName() {
@@ -13,9 +14,14 @@ class PopupInput extends HTMLElement {
     return this.getAttribute('input-placeholder')
   }
 
+  get inputValue() {
+    return this.input.value
+  }
+
   connectedCallback() {
     this.template.innerHTML = this.render()
     this.shadowRoot.appendChild(this.template.content.cloneNode(true))
+    this.input = this.shadowRoot.querySelector(`#${this.inputName}`)
   }
 
   render() {
