@@ -1,4 +1,5 @@
 import './components/table-header/table-header.js'
+import './components/table-header-row/table-header-row.js'
 import './components/table-row/table-row.js'
 import './components/users-table/users-table.js'
 import './components/table-cell/table-cell.js'

@@ -14,7 +14,7 @@ class UsersTable extends HTMLElement {
           border-radius: 5px;
           width: 100%;
         }
-        tr, table-row {
+        table-header-row, table-row {
           height: 45px;
           display: table-row;
         }
@@ -61,7 +61,7 @@ class UsersTable extends HTMLElement {
       ${this.styles}
       <table id="table">
         <thead>
-          <table-row header-row></table-row>
+          <table-header-row></table-header-row>
         </thead>
         <tbody id="body">
           <slot></slot>

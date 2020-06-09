@@ -8,9 +8,6 @@ class TableRow extends HTMLElement {
   static get dataKeys() {
     return formattedHeaders
   }
-  static get getRawKeys() {
-    return headers
-  }
   constructor() {
     super()
     this.attachShadow({mode: 'open'})
@@ -28,18 +25,14 @@ class TableRow extends HTMLElement {
     this.classList.add('user-row')
     this.userId = this.data.id
     this.shadowRoot.appendChild(this.template.content.cloneNode(true))
-    if (!this.hasAttribute('header-row')) {
-      this.deleteBtn = this.shadowRoot.querySelector('table-button')
-      this.deleteBtn.addEventListener('click', this.deleteBtnHandler)
-      this.addEventListener('update-user', this.cellUpdateHandler)
-    }
+    this.deleteBtn = this.shadowRoot.querySelector('table-button')
+    this.deleteBtn.addEventListener('click', this.deleteBtnHandler)
+    this.addEventListener('update-user', this.cellUpdateHandler)
   }
 
   disconnectedCallback() {
-    if (!this.hasAttribute('header-row')) {
-      this.deleteBtn.removeEventListener('click', this.deleteBtnHandler)
-      this.removeEventListener('update-user', this.cellUpdateHandler)
-    }
+    this.deleteBtn.removeEventListener('click', this.deleteBtnHandler)
+    this.removeEventListener('update-user', this.cellUpdateHandler)
     this.data = null
   }
 
@@ -51,10 +44,6 @@ class TableRow extends HTMLElement {
     ></table-cell>`).join('')
   }
 
-  _createHeadersRow() {
-    return TableRow.getRawKeys.map(key => `<table-header>${key}</table-header>`).join('')
-  }
-  
   deleteBtnHandler() {
     if (confirm('Are you sure you what to delete user? \n It cannot be undone!')) {
       updater.dispatch('delete-user', this.userId)
@@ -75,11 +64,7 @@ class TableRow extends HTMLElement {
   }
 
   render() {
-    return this.hasAttribute('header-row') 
-      ? `
-        ${this._createHeadersRow()}
-      `
-      : `
+    return `
         ${this._renderTableCells()}
         <table-button btntype="delete" title="delete user">&mdash;</table-button>
       `
