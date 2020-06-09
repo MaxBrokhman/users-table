@@ -28,18 +28,35 @@ class TableHeaderRow extends HTMLElement {
     const path = evt.composedPath()
     const targetBtn = path.find(element => 
       element.tagName && element.tagName.toLowerCase() === 'table-button')
-    if (targetBtn) {
+    if (targetBtn && !targetBtn.classList.contains('active')) {
       const header = path.find(element => 
         element.tagName && element.tagName.toLowerCase() === 'table-header')
       const sort = convertHeaderToProp(header.textContent)
       const order = targetBtn.btntype
       updater.dispatch('sort', { sort, order })
+      this.shadowRoot.querySelector('table-button.active').classList.remove('active')
+      targetBtn.classList.add('active')
     }
   }
 
   render() {
     return `
-      ${TableHeaderRow.headerKeys.map((key) => `<table-header>${key}</table-header>`).join('')}
+      ${TableHeaderRow.headerKeys.map((key, idx) => `
+      <table-header>
+        ${key}
+        <table-button
+          title="sort in ascending order" 
+          btntype="asc"
+          slot="buttons"
+          class="${idx === 0 ? 'active' : ''}"
+        ></table-button>
+        <table-button 
+          title="sort in descending order" 
+          btnType="desc"
+          slot="buttons"
+        ></table-button>
+      </table-header>
+    `).join('')}
     `
   }
 }

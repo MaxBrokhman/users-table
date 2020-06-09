@@ -37,8 +37,7 @@ class TableHeader extends HTMLElement {
     return `
       ${this.styles}
       <span><slot></slot></span>
-      <table-button title="sort in ascending order" btntype="asc"></table-button>
-      <table-button title="sort in descending order" btnType="desc"></table-button>
+      <slot name="buttons"></slot>
     `
   }
 }
