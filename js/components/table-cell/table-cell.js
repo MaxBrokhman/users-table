@@ -80,7 +80,7 @@ class TableCell extends HTMLElement {
     this.template.innerHTML = this.render()
     this.className = 'table-cell table-cell__with-data'
     this.appendChild(this.template.content.cloneNode(true))
-    this.contentSpan = this.querySelector('#content')
+    this.contentSpan = this.querySelector('.table-cell-data')
   }
 
   disconnectedCallback() {
@@ -128,7 +128,7 @@ class TableCell extends HTMLElement {
             class="btn confirm-btn success-btn"
           >✔</button>
         </form>`
-        : `<span id="content" class="table-cell-data">${this.cellContent}</span>`}
+        : `<span class="table-cell-data">${this.cellContent}</span>`}
       `
   }
 }

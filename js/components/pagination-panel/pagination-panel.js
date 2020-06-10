@@ -25,7 +25,7 @@ class PaginationPanel extends HTMLElement {
     this.className = "pagination-btn-container"
     this.addEventListener('click', this.clickHandler)
     this.appendChild(this.template.content.cloneNode(true))
-    this.contentSpan = this.querySelector('#content')
+    this.contentSpan = this.querySelector('.pagination-number')
   }
 
   disconnectedCallback() {
@@ -52,7 +52,7 @@ class PaginationPanel extends HTMLElement {
     return `
       <button id="first" title="first page" class="btn pagination-btn pagination-btn__first reqular-btn">&lt;&lt;</button>
       <button class="btn pagination-btn pagination-btn__previous reqular-btn" id="previous" title="previous page">&lt;</button>
-      <span id="content" class="pagination-number">1</span>
+      <span class="pagination-number">1</span>
       <button class="btn pagination-btn pagination-btn__next reqular-btn" id="next" title="next page">></button>
       <button class="btn pagination-btn pagination-btn__last reqular-btn" id="last" title="last page">>></button>
     `
