@@ -6,7 +6,6 @@ class PaginationPanel extends HTMLElement {
   }
   constructor() {
     super()
-    this.attachShadow({mode: 'open'})
     this.template = document.createElement('template')
     this.contentSpan = null
 
@@ -23,9 +22,10 @@ class PaginationPanel extends HTMLElement {
 
   connectedCallback() {
     this.template.innerHTML = this.render()
+    this.className = "pagination-btn-container"
     this.addEventListener('click', this.clickHandler)
-    this.shadowRoot.appendChild(this.template.content.cloneNode(true))
-    this.contentSpan = this.shadowRoot.querySelector('#content')
+    this.appendChild(this.template.content.cloneNode(true))
+    this.contentSpan = this.querySelector('#content')
   }
 
   disconnectedCallback() {
@@ -43,55 +43,18 @@ class PaginationPanel extends HTMLElement {
   }
 
   clickHandler(evt) {
-    const path = evt.composedPath()
-    const targetBtn = path.find((element) => 
-      element.tagName && element.tagName.toLowerCase() === 'button')
-    if (targetBtn) {
-      updater.dispatch('page-change', targetBtn.id)
+    if (evt.target && evt.target.tagName.toLowerCase() === 'button') {
+      updater.dispatch('page-change', evt.target.id)
     }
   }
 
   render() {
     return `
-      <style>
-        :host {
-          align-self: center;
-          margin-top: 15px;
-          display: flex;
-          width: 160px;
-          justify-content: space-between;
-          contain: content;
-        }
-        button {
-          background-color: white;
-          border-radius: 0.25rem;
-          cursor: pointer;
-          border: 1px solid;
-          transition: background-color 0.5s ease;
-          font: inherit;
-          border-color: #343a40;
-        }
-        button:hover {
-          color: white;
-          background-color: #343a40;
-        }
-        #content {
-          display: block;
-          width: 20px;
-          background-color: white;
-          border-radius: 0.25rem;
-          font: inherit;
-          border: 1px solid #343a40;
-          text-align: center;
-          margin: 0 5px;
-          padding: 5px;
-        }
-      </style>
-      <button id="first" title="first page">&lt;&lt;</button>
-      <button id="previous" title="previous page">&lt;</button>
-      <span id="content">1</span>
-      <button id="next" title="next page">></button>
-      <button id="last" title="last page">>></button>
+      <button id="first" title="first page" class="btn pagination-btn pagination-btn__first reqular-btn">&lt;&lt;</button>
+      <button class="btn pagination-btn pagination-btn__previous reqular-btn" id="previous" title="previous page">&lt;</button>
+      <span id="content" class="pagination-number">1</span>
+      <button class="btn pagination-btn pagination-btn__next reqular-btn" id="next" title="next page">></button>
+      <button class="btn pagination-btn pagination-btn__last reqular-btn" id="last" title="last page">>></button>
     `
   }
 }

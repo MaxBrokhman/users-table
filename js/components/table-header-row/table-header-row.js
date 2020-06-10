@@ -9,7 +9,6 @@ class TableHeaderRow extends HTMLElement {
   }
   constructor() {
     super()
-    this.attachShadow({mode: 'open'})
     this.template = document.createElement('template')
 
     this.sortHandler = this.sortHandler.bind(this)
@@ -18,7 +17,7 @@ class TableHeaderRow extends HTMLElement {
   connectedCallback() {
     this.template.innerHTML = this.render()
     this.addEventListener('click', this.sortHandler)
-    this.shadowRoot.appendChild(this.template.content.cloneNode(true))
+    this.appendChild(this.template.content.cloneNode(true))
   }
 
   disconnectedCallback() {
@@ -26,37 +25,38 @@ class TableHeaderRow extends HTMLElement {
   }
 
   sortHandler(evt) {
-    const path = evt.composedPath()
-    const targetBtn = path.find(element => 
-      element.tagName && element.tagName.toLowerCase() === 'table-button')
-    if (targetBtn && !targetBtn.classList.contains('active')) {
-      const header = path.find(element => 
-        element.tagName && element.tagName.toLowerCase() === 'table-header')
+    const target = evt.target
+    if (
+      target && 
+      target.tagName.toLowerCase() ==='button' && 
+      !target.classList.contains('sort-btn__active')
+    ) {
+      const header = target.closest('th')
       const sort = convertHeaderToProp(header.textContent)
-      const order = targetBtn.btntype
+      const order = target.dataset.type
+      
       updater.dispatch('sort', { sort, order })
-      this.shadowRoot.querySelector('table-button.active').classList.remove('active')
-      targetBtn.classList.add('active')
+      this.querySelector('.sort-btn__active').classList.remove('sort-btn__active')
+      target.classList.add('sort-btn__active')
     }
   }
 
   render() {
     return `
-      ${TableHeaderRow.headerKeys.map((key, idx) => `
-      <table-header>
-        ${key}
-        <table-button
+      ${TableHeaderRow.headerKeys.map((key) => `
+      <th class="table-cell main-table-header">
+        <span class="table-header-caption">${key}</span>
+        <button
           title="sort in ascending order" 
-          btntype="asc"
-          slot="buttons"
-          class="${convertHeaderToProp(key) === usersManager.sortTerm ? 'active' : ''}"
-        ></table-button>
-        <table-button 
+          data-type="asc"
+          class="btn sort-btn sort-btn__up reqular-btn ${convertHeaderToProp(key) === usersManager.sortTerm ? 'sort-btn__active' : ''}"
+        ></button>
+        <button 
+          class="btn sort-btn sort-btn__down reqular-btn"
           title="sort in descending order" 
-          btnType="desc"
-          slot="buttons"
-        ></table-button>
-      </table-header>
+          data-type="desc"
+        ></button>
+      </th>
     `).join('')}
     `
   }

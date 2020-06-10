@@ -1,7 +1,6 @@
 class PopupInput extends HTMLElement {
   constructor() {
     super()
-    this.attachShadow({mode: 'open'})
     this.template = document.createElement('template')
     this.input = null
   }
@@ -18,32 +17,27 @@ class PopupInput extends HTMLElement {
     return this.input.value
   }
 
+  get labelCaption() {
+    return this.getAttribute('label-caption') || ''
+  }
+
   connectedCallback() {
     this.template.innerHTML = this.render()
-    this.shadowRoot.appendChild(this.template.content.cloneNode(true))
-    this.input = this.shadowRoot.querySelector(`#${this.inputName}`)
+    this.appendChild(this.template.content.cloneNode(true))
+    this.input = this.querySelector(`#${this.inputName}`)
   }
 
   render() {
     return `
-      <style>
-        label {
-          width: 100px;
-          display: block;
-          align-self: center;
-        }
-        input {
-          padding: 5px;
-        }
-      </style>
-      <label for="${this.inputName}">
-        <slot></slot>
+      <label for="${this.inputName}" class="new-user-form__label">
+        ${this.labelCaption}
       </label>
       <input 
         id=${this.inputName}
         required
         placeholder="${this.inputPlaceHolder}"
         type="${this.inputName.toLowerCase().includes('date') ? 'date' : ''}"
+        class="new-user-form__input"
       >
     `
   }

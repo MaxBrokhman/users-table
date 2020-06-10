@@ -6,7 +6,6 @@ class TableCell extends HTMLElement {
   }
   constructor() {
     super()
-    this.attachShadow({mode: 'open'})
     this.template = document.createElement('template')
     this.contentSpan = null
     this.form = null
@@ -47,11 +46,12 @@ class TableCell extends HTMLElement {
       switch (name) {
         case 'iseditable':
           if (this.iseditable) {
-            this.shadowRoot.innerHTML = this.render()
-            this.form = this.shadowRoot.querySelector('#form')
-            this.input = this.shadowRoot.querySelector('#input')
+            this.innerHTML = this.render()
+            this.form = this.querySelector('#form')
+            this.input = this.querySelector('input')
             this.style.padding = '0'
-            this.input.style.height = `${this.offsetHeight}px`
+            this.input.style.height = `${this.clientHeight}px`
+            this.input.style.width = `${this.clientWidth}px`
             this._initListeners()
             this.input.focus()
             if (this.input.type === 'text')
@@ -59,8 +59,8 @@ class TableCell extends HTMLElement {
           } else {
             this._destroyListeners()
             this.style.padding = ''
-            this.shadowRoot.innerHTML = this.render()
-            this.contentSpan = this.shadowRoot.querySelector('#content')
+            this.innerHTML = this.render()
+            this.contentSpan = this.querySelector('#content')
           }
       }
     }
@@ -78,12 +78,12 @@ class TableCell extends HTMLElement {
 
   connectedCallback() {
     this.template.innerHTML = this.render()
-    this.shadowRoot.appendChild(this.template.content.cloneNode(true))
-    this.contentSpan = this.shadowRoot.querySelector('#content')
+    this.className = 'table-cell table-cell__with-data'
+    this.appendChild(this.template.content.cloneNode(true))
+    this.contentSpan = this.querySelector('#content')
   }
 
   disconnectedCallback() {
-    console.log('table-cell disconnected')
     if (this.iseditable)
       this._destroyListeners()
   }
@@ -117,51 +117,18 @@ class TableCell extends HTMLElement {
 
   render() {
     return `
-      <style>
-        :host {
-          display: table-cell;
-          text-align: left;
-          min-height: 20px;
-          border: 1px solid rgba(0,0,0,.125);
-          box-sizing: border-box;
-          padding: 0;
-          width: calc(1200px/7);
-          padding-left: 10px;
-          font-size: .9rem;
-          contain: content;
-          vertical-align: middle;
-          transition: background-color 0.5s ease;
-          cursor: pointer;
-        }
-        :host(:hover) {
-          background-color: darkgrey;
-        }
-        #content {
-          padding: 5px;
-          display: inline-block;
-          width: 100%;
-          box-sizing: border-box;
-          word-break: normal;
-        }
-        #input, #form {
-          width: 100%;
-          box-sizing: border-box;
-        }
-        #input {
-          padding-left: 10px;
-        }
-      </style>
       ${this.iseditable 
         ? `
         <form id="form">
           <input 
-            id="input" 
             value="${this.isDateInput ? '' : this.cellContent}" 
             type="${this.isDateInput ? 'date' : 'text'}"
           >
-          <table-button id="btn" btntype="confirm">✔</table-button>
+          <button 
+            class="btn confirm-btn success-btn"
+          >✔</button>
         </form>`
-        : `<span id="content">${this.cellContent}</span>`}
+        : `<span id="content" class="table-cell-data">${this.cellContent}</span>`}
       `
   }
 }

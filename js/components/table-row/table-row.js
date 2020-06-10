@@ -10,7 +10,6 @@ class TableRow extends HTMLElement {
   }
   constructor() {
     super()
-    this.attachShadow({mode: 'open'})
     this.template = document.createElement('template')
     this.data = {}
     this.userId = null
@@ -24,10 +23,10 @@ class TableRow extends HTMLElement {
     this.template.innerHTML = this.render()
     this.classList.add('user-row')
     this.userId = this.data.id
-    this.shadowRoot.appendChild(this.template.content.cloneNode(true))
-    this.deleteBtn = this.shadowRoot.querySelector('table-button')
-    this.deleteBtn.addEventListener('click', this.deleteBtnHandler)
     this.addEventListener('update-user', this.cellUpdateHandler)
+    this.appendChild(this.template.content.cloneNode(true))
+    this.deleteBtn = this.querySelector('.delete-row-btn')
+    this.deleteBtn.addEventListener('click', this.deleteBtnHandler)
   }
 
   disconnectedCallback() {
@@ -66,7 +65,11 @@ class TableRow extends HTMLElement {
   render() {
     return `
         ${this._renderTableCells()}
-        <table-button btntype="delete" title="delete user">&mdash;</table-button>
+        <button 
+          class="btn delete-row-btn danger-btn"
+          title="delete user"
+        >&mdash;
+        </button>
       `
   }
 }

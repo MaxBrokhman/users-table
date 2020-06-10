@@ -83,8 +83,6 @@ class PageManager {
   }
 
   updateWithNewData(user) {
-    console.log(user);
-    
     this.dataManager.add(user)
   }
 }

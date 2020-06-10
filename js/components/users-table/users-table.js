@@ -1,34 +1,12 @@
 class UsersTable extends HTMLElement {
   constructor() {
     super()
-    this.attachShadow({mode: 'open'})
     this.template = document.createElement('template')
     this._data = []
     this.body = null
-    this.styles = `
-      <style>
-        #table {
-          display: table;
-          margin: 0 auto;
-          border-collapse: collapse;
-          border-radius: 5px;
-          width: 100%;
-        }
-        table-header-row, table-row {
-          height: 45px;
-          display: table-row;
-        }
-        table-row:nth-of-type(odd) {
-          background-color: antiquewhite;
-        }
-        table-row:nth-of-type(even) {
-          background-color: gainsboro;
-        }
-      </style>
-    `
+    this.table = null
 
     this.editHandler = this.editHandler.bind(this)
-    this.deleteRowHandler = this.deleteRowHandler.bind(this)
   }
 
   get data() {
@@ -48,23 +26,18 @@ class UsersTable extends HTMLElement {
   }
 
   editHandler(evt) {
-    const target = evt.composedPath().find(element => element.iseditable !== undefined)
-    if (!target || target.iseditable) return
-    if (target) {
-      console.log('editing ', target)
-      target.iseditable = true
+    const target = evt.target
+    if (target && target.tagName.toLowerCase() === 'span') {
+      const cell = target.closest('table-cell')
+      if (!cell || cell.iseditable) return
+      cell.iseditable = true
     }
   }
 
   render() {
     return `
-      ${this.styles}
-      <table id="table">
-        <thead>
-          <table-header-row></table-header-row>
-        </thead>
-        <tbody id="body">
-          <slot></slot>
+      <table id="table" class="main-table">
+        <tbody id="body" class="main-table-body">
         </tbody>
       </table>
     `
@@ -81,15 +54,13 @@ class UsersTable extends HTMLElement {
     this.body.appendChild(fragment)
   }
 
-  deleteRowHandler() {
-    this.body.insertAdjacentHTML('beforeend', `<>`)
-  }
-
   connectedCallback() {
     this.template.innerHTML = this.render()
-    this.shadowRoot.appendChild(this.template.content.cloneNode(true))
-    this.body = this.shadowRoot.querySelector('#body')
+    this.table = this.template.content.querySelector('#table')
+    this.table.insertAdjacentElement('afterbegin', document.createElement('table-header-row'))
     this.addEventListener('click', this.editHandler)
+    this.appendChild(this.template.content.cloneNode(true))
+    this.body = this.querySelector('#body')
     this._renderWithNewData()
   }
 
