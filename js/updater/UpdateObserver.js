@@ -1,6 +1,6 @@
 class UpdateObserver {
   constructor() {
-    this.subscriptions = {}
+    this.subscriptions = Object.create(null)
   }
 
   subscribe(event, callback) {
