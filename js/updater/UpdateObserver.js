@@ -13,7 +13,8 @@ class UpdateObserver {
 
   unsubscribe(event, callback) {
     if (this.subscriptions[event]) {
-      this.subscriptions = this.subscriptions.filter(sub => sub !== callback)
+      this.subscriptions[event] =
+        this.subscriptions[event].filter((sub) => sub !== callback)
     }
   }
 
